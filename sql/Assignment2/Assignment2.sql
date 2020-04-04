@@ -18,8 +18,7 @@ create table Account(
    DepartmentID int,
    foreign key Department(DepartmentID),
    Position_ID int,
-   
    CreateDate date,
-   
+   FullNAme 
 );
 
