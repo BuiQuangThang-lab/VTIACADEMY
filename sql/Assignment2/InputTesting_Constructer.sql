@@ -32,14 +32,14 @@ DROP TABLE IF EXISTS `Group`;
 CREATE TABLE `Group`(
   GroupID            TINYINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   GroupName          VARCHAR(50) UNIQUE NOT NULL,
-  CreatorID          TINYINT UNSIGNED NOT NULL,
+  CreatorID          TINYINT UNSIGNED  NOT NULL,
   CreateDate         DATE DEFAULT (CURRENT_DATE)
 );
 -- TABLE 5
 DROP TABLE IF EXISTS GroupAccount;
 CREATE TABLE GroupAccount(
-  GroupID            TINYINT UNSIGNED AUTO_INCREMENT  NOT NULL,
-  AccountID          SMALLINT UNSIGNED  NOT NULL,
+  GroupID            TINYINT UNSIGNED NOT NULL,
+  AccountID          SMALLINT  UNSIGNED AUTO_INCREMENT NOT NULL,
   joinDate           DATE DEFAULT (CURRENT_DATE),
   UNIQUE(GroupID,AccountID),
   FOREIGN KEY (GroupID) REFERENCES `Group`(GroupID),
@@ -55,7 +55,7 @@ CREATE TABLE TypeQuestion(
 DROP TABLE IF EXISTS CategoryQuestion;
 CREATE TABLE CategoryQuestion(
  CategoryID             TINYINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
- CategoryNAme           VARCHAR(50) UNIQUE NOT NULL
+ CategoryName           VARCHAR(50) UNIQUE NOT NULL
 );
 -- TABLE 8
 DROP TABLE IF EXISTS Question;
@@ -64,7 +64,7 @@ CREATE TABLE Question(
  Content                  TEXT NOT NULL,
  CategoryID               TINYINT UNSIGNED NOT NULL,
  TypeID                   TINYINT UNSIGNED  NOT NULL,
- CreatorID                TINYINT UNSIGNED NOT NULL,
+ CreatorID                TINYINT UNSIGNED  NOT NULL,
  CreateDate               DATE DEFAULT (CURRENT_DATE),
  FOREIGN KEY (CategoryID) REFERENCES CategoryQuestion(CategoryID),
  FOREIGN KEY (TypeID) REFERENCES TypeQuestion(TypeID)
@@ -85,7 +85,7 @@ CREATE TABLE Exam(
  Codes          TINYINT UNSIGNED  NOT NULL,
  Title          TEXT NOT NULL,
  CategoryID     TINYINT UNSIGNED  NOT NULL,
- Duration       DATETIME NOT NULL,
+ Duration       TINYINT NOT NULL,
  CreatorID      TINYINT UNSIGNED  NOT NULL,
  CreateDate     DATE DEFAULT (CURRENT_DATE),
  FOREIGN KEY (CategoryID) REFERENCES CategoryQuestion(CategoryID)
@@ -94,8 +94,8 @@ CREATE TABLE Exam(
 -- TABLE 11
 DROP TABLE IF EXISTS ExamQuestion;
 CREATE TABLE ExamQuestion(
- ExamID          TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
- QuestionID      SMALLINT UNSIGNED NOT NULL,
+ ExamID          TINYINT UNSIGNED  NOT NULL,
+ QuestionID      SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
  FOREIGN KEY (ExamID) REFERENCES Exam(ExamID),
  FOREIGN KEY (QuestionID) REFERENCES Question(QuestionID)
 
