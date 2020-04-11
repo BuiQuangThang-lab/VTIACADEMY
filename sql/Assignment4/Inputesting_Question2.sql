@@ -18,7 +18,7 @@ UNION
 SELECT CreatorID FROM Exam;
 
 -- Question 4: Viết lệnh để lấy ra danh sách các phòng ban có >3 nhân viên 
-SELECT Department.DepartmentName, COUNT(1) 
+SELECT *, COUNT(1) 
 FROM `Account` 
 JOIN Department ON `Account`.DepartmentID = Department.DepartmentID
 GROUP BY (`Account`.DepartmentID)
@@ -56,12 +56,10 @@ JOIN `Group` ON GroupAccount.GroupID = `Group`.GroupID
 GROUP BY(GroupAccount.GroupID);
 
 -- Question 10: Tìm chức vụ có ít người nhất 
-SELECT PositionName, COUNT(1) AS so_nguoi
+SELECT `Account`.PositionID, COUNT(1) AS so_nguoi
 FROM `Account` 
-JOIN `Position` ON  `Account`.PositionID = `Position`.PositionID
 GROUP BY(`Account`.PositionID)
-ORDER BY (so_nguoi) DESC
-LIMIT 1;
+HAVING so_nguoi = (SELECT MAX(x) FROM (SELECT COUNT(*) AS x FROM `Account` GROUP BY `Account`.PositionID) AS T);
 
 -- Question 11: thống kê mỗi phòng ban có bao nhiêu dev, test, scrum master, PM 
 SELECT Department.DepartmentName,`Position`.PositionName, COUNT(`Account`.AccountID)
