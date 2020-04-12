@@ -9,14 +9,35 @@ SELECT DepartmentID FROM Department
 WHERE DepartmentName = 'Audit Dep’t' ;
 
 -- Question 4: lấy ra thông tin account có full name dài nhất và sắp xếp chúng theo thứ tự giảm dần
-SELECT AccountID, MAX(FullName) 
-FROM `Account`
-ORDER BY FullName DESC;
-
--- Question 5: lấy ra thông tin Account có fullName dài nhất và thuộc phòng ban có id = 3
+-- Cách 1: Sử dụng EXT
+WITH do_dai_ten AS(
+    SELECT FullName,LENGTH(FullName)
+    FROM `Account`
+)
 SELECT * , MAX(FullName)
+FROM do_dai_ten;
+
+-- Cách 2: Sử dụng Sub_Querry
+SELECT FullName, LENGTH(FullName)  
 FROM `Account`
-WHERE DepartmentID = 3;
+WHERE LENGTH(FullName)  = (SELECT MAX(x) FROM (SELECT LENGTH(FullName) AS x FROM `Account`) AS T);
+
+-- Question 5: lấy ra thông tin Account có fullName dài nhất và thuộc phòng ban có id = 1
+-- Cách 1: Sử dụng EXT
+WITH do_dai_ten AS(
+    SELECT FullName,LENGTH(FullName)
+    FROM `Account`
+    WHERE `Account`.DepartmentID = 1
+)
+SELECT * ,MAX(FullName)
+FROM do_dai_ten;
+
+
+-- Cách 2: Sử dụng Sub_Querry
+SELECT * , LENGTH(FullName)
+FROM `Account`
+WHERE LENGTH(FullName)  = (SELECT MAX(x) FROM (SELECT LENGTH(FullName) AS x FROM `Account`) AS T)
+      AND  DepartmentID = 1;
 
 -- Question 6:  lấy ra tên group đã tham gia trước ngày 20/12/2020
 SELECT GroupName 

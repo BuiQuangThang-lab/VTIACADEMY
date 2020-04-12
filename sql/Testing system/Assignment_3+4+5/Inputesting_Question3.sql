@@ -15,8 +15,7 @@ SELECT  FullName, Email, COUNT(1) AS so_luong
 FROM `Account`
 INNER JOIN GroupAccount ON `Account`.AccountID = GroupAccount.AccountID
 GROUP BY(`Account`.AccountID)
-ORDER BY so_luong DESC
-LIMIT 1;
+HAVING so_luong =(SELECT MAX(x) FROM (SELECT COUNT(1) AS x FROM `Account` GROUP BY `Account`.AccountID) AS T);
 SELECT * FROM v_maxGroup;
 
 -- Question 3: Tạo view có chứa câu hỏi có những content quá dài (content quá 300 từ được coi là quá dài) và xóa nó đi 
@@ -29,12 +28,11 @@ DROP VIEW v_Content_dài;
 
 -- Question 4: Tạo view có chứa danh sách các phòng ban có nhiều nhân viên nhất
 CREATE OR REPLACE VIEW v_Phong_nhieu_nv AS
-SELECT DepartmentName, COUNT(1)
-FROM Department 
-JOIN `Account` ON  Department.DepartmentID=`Account`.DepartmentID
-GROUP BY (Department.DepartmentID)
-ORDER BY COUNT(1) DESC 
-LIMIT 3;
+SELECT d.DepartmentName, COUNT(1) AS so_nv
+FROM Department d
+JOIN `Account` a ON  d.DepartmentID= a.DepartmentID
+GROUP BY a.DepartmentID
+HAVING so_nv =(SELECT MAX(x) FROM (SELECT COUNT(1) AS x FROM Department GROUP BY Department.DepartmentID) AS T);
 SELECT * FROM v_Phong_nhieu_nv;
 
 

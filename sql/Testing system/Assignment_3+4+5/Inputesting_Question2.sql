@@ -17,7 +17,7 @@ SELECT CreatorID FROM Question
 UNION
 SELECT CreatorID FROM Exam;
 
--- Question 4: Viết lệnh để lấy ra danh sách các phòng ban có >3 nhân viên 
+-- Question 4: Viết lệnh để lấy ra danh sách các phòng ban có >=2 nhân viên 
 SELECT *, COUNT(1) 
 FROM `Account` 
 JOIN Department ON `Account`.DepartmentID = Department.DepartmentID
@@ -42,12 +42,23 @@ FROM ExamQuestion
 GROUP BY(QuestionID);
 
 -- Question 8: Lấy ra Question có nhiều câu trả lời nhất 
+-- Cách 1: Sử đụng EXT
+WITH Question_Answer AS(
+  SELECT a.QuestionID, q.Content, a.AnswerID, COUNT(1) AS x
+  FROM Answer a
+  JOIN Question q ON a.QuestionID = q.QuestionID
+  GROUP BY q.QuestionID
+)
+SELECT * , MAX(x)
+FROM Question_Answer;
+    
+-- Cách 2: Sử dụng Sub_Querry
 SELECT Answer.QuestionID,Question.Content, COUNT(1) AS so_Answer
 FROM Answer 
 JOIN Question ON Answer.QuestionID = Question.QuestionID
-GROUP BY (Answer.QuestionID)
-ORDER BY (so_Answer)
-LIMIT 1;
+GROUP BY Answer.QuestionID
+HAVING so_Answer = (SELECT MAX(x) FROM (SELECT COUNT(*) AS x FROM Answer GROUP BY Answer.QuestionID ) AS T);
+
 
 -- Question 9: Thống kê số lượng account trong mỗi group 
 SELECT GroupName, COUNT(AccountID) AS so_Account 
@@ -55,7 +66,16 @@ FROM GroupAccount
 JOIN `Group` ON GroupAccount.GroupID = `Group`.GroupID 
 GROUP BY(GroupAccount.GroupID);
 
--- Question 10: Tìm chức vụ có ít người nhất 
+-- Question 10: Tìm chức vụ có ít người nhất
+-- Cách 1: Sử dụng EXT
+WITH Position_Count AS(
+SELECT `Account`.PositionID, COUNT(1) AS so_nguoi
+FROM `Account` 
+GROUP BY(`Account`.PositionID)
+)
+SELECT * , MIN(so_nguoi)
+FROM Position_Count;
+-- Cách 2: Sử dụng SubQuerry 
 SELECT `Account`.PositionID, COUNT(1) AS so_nguoi
 FROM `Account` 
 GROUP BY(`Account`.PositionID)
@@ -72,20 +92,19 @@ GROUP BY Department.DepartmentName,`Position`.PositionName;
 SELECT TypeQuestion.TypeName, Question.CreatorID, Answer.Content
 FROM Question
 JOIN TypeQuestion ON Question.TypeID = TypeQuestion.TypeID
-JOIN Answer ON Question.QuestionID = Answer.QuestionID
+JOIN Answer ON Question.QuestionID = Answer.QuestionID;
 
 -- Question 13: lấy ra số lượng câu hỏi của mỗi loại tự luận hay trắc nghiệm  
 SELECT DISTINCT TypeQuestion.TypeName, COUNT(1) AS so_cau_hoi
 FROM Question
 JOIN TypeQuestion ON Question.TypeID = TypeQuestion.TypeID
-GROUP BY TypeQuestion.TypeID
+GROUP BY TypeQuestion.TypeID;
 
 -- Question 14: lấy ra group không có account nào 
-SELECT `Group`.GroupName, COUNT(1) AS so_luong
+SELECT `Group`.GroupName
 FROM `Group`
-JOIN GroupAccount ON `Group`.GroupID = GroupAccount.GroupID
-GROUP BY(`Group`.GroupID)
-HAVING so_luong = 4;
+LEFT JOIN GroupAccount ON `Group`.GroupID = GroupAccount.GroupID;
+
 
 -- Question 17:  
 -- a) Lấy các account thuộc nhóm thứ 1 
