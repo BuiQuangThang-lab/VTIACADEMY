@@ -34,7 +34,7 @@ VALUE                  ('Buithang220398@gmail.com',  'BuiThang',   'Bùi Quang T
                        ('Nhung.nt@gmail.com',        'NguyenNhung','Nguyễn Thị Nhung',		5,						6),
                        ('Thanh.bt@gmail.com',        'BuiThanh',   'Bùi Thị Thanh',			1,						3),
                        ('Nga.mc@gmail.com',          'MacNga',     'Lý Thu Nga',			7,						8),
-                       ('Thu.ngt@gmail.com',         'NguyenThu'   'Nguyễn Hoài Thu',		4,						5),
+                       ('Thu.ngt@gmail.com',         'NguyenThu',   'Nguyễn Hoài Thu',		4,						5),
                        ('Quang.td@gmail.com',        'TrinhQuang', 'Lê Trịnh Quang',		8,						1),
                        ('Duy.nq@gmail.com',          'QuangDuy',   'Nguyễn Quang Duy',		9,						1),
                        ('Canh.nd@gmail.com',         'DucCanh',    'Nguyễn Đức Cảnh',		10,						2),
