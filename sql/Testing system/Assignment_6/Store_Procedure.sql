@@ -156,7 +156,7 @@ CALL Find_User_Name('h');
 
 DROP PROCEDURE IF EXISTS Auto_Update;
 DELIMITER $$
-CREATE PROCEDURE Auto_Update (IN String_Email VARCHAR(50),IN Postion_ID TINYINT)
+CREATE PROCEDURE Auto_Update (IN String_Email VARCHAR(50))
    BEGIN 
           SELECT  REPLACE (`Account`.Email,'@gmail.com','')
           FROM `Account` 
@@ -250,10 +250,13 @@ DELIMITER ;
 CALL Question_One_Month();
 
 --Question 13: Viết store để in ra mỗi tháng có bao nhiêu câu hỏi được tạo trong 6 tháng gần đây nhất (nếu tháng nào không có thì sẽ in ra là "không có câu hỏi nào trong tháng") 
- 
- SELECT MONTH(q.CreateDate), COUNT(1)
- FROM question q
- WHERE q.CreateDate > (SELECT DISTINCT DATE_SUB(Question.CreateDate,INTERVAL -182 DAY) FROM Question)
- GROUP BY (MONTH(q.CreateDate));
+ SELECT Near6MONTH.MONTH, COUNT(QuestionID)
+ FROM
+ (SELECT MONTH(CreateDate) AS MONTH 
+ FROM Question q
+ WHERE CreateDate < (SELECT DISTINCT DATE_SUB(Question.CreateDate,INTERVAL -182 DAY) FROM Question)) AS Near6MONTH
+ LEFT JOIN Question ON Near6MONTH.MONTH = MONTH(CreateDate)
+ GROUP BY (MONTH(CreateDate))
+ ORDER BY Near6MONTH.MONTH ASC;
 
 
