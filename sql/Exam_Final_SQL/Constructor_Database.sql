@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS Student;
 CREATE TABLE Student(
      RN  							SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
      `Name`							VARCHAR(50) NOT NULL,
-     Gender                         ENUM('Male','Female','Unknow')
+     Gender                         BIT
 );
 
 DROP TABLE IF EXISTS `Subject`; 
@@ -27,9 +27,9 @@ CREATE TABLE StudentSubject(
 );
 -- -----------------------------INSERT DATA---------------------------------------------------------------------------------------
 INSERT INTO Student(  `Name`,                       Gender )
-VALUE              ('Bùi Quang Thắng',				'Male' ),
-				   ('Nguyễn Thị Nhung',				'Female'),
-                   ('Lê Bảo Tuyến',					'Unknow');
+VALUE              ('Bùi Quang Thắng',				0 ),
+				   ('Nguyễn Thị Nhung',				1),
+                   ('Lê Bảo Tuyến',					null);
 
 INSERT INTO `Subject`(		sName			)
 VALUE                (		'Math'			),
@@ -39,7 +39,5 @@ VALUE                (		'Math'			),
 INSERT INTO StudentSubject(RN,	sID,	Mark	)
 VALUE                 	  (1,	1,		8.5		),
 						  (1,	2,		7.5		),
-                          (2,	2,		3),
-                          (2,	3,		2),
-                          (3,	1,		5.5),
-                          (3,	3,		1.5);
+                          (2,	2,		3)
+                          

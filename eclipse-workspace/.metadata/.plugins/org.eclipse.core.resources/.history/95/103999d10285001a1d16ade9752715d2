@@ -1,0 +1,12 @@
+import java.util.Date;
+
+public class Account {
+	int id;
+	String Eamil;
+	String UserName;
+	String fullName;
+	Position Position;
+	Date CretateDate;
+	Group[] Groups;
+	Department[] Departments;
+};

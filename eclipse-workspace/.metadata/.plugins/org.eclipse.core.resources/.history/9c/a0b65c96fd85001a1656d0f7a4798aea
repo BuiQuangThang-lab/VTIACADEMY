@@ -1,0 +1,9 @@
+
+public class Khoa {
+    byte id;
+    String name;
+    String vanPhongKhoa;
+    String sđt;
+}
+
+

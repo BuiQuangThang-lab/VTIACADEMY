@@ -1,0 +1,11 @@
+import java.util.Date;
+
+public class Question {
+   int QuestionId;
+   String Name;
+   CategoryQuestion Category;
+   TypeQuestion TypeId;
+   Account CreatorID;
+   Date CreateDate;
+   Exam[] Exam;
+}

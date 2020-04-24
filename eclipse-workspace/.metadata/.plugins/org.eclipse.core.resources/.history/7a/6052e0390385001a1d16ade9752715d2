@@ -1,0 +1,9 @@
+import java.util.Date;
+
+public class Group {
+    byte id;
+    String Names;
+    int Creator;
+    Date CreateDate; 
+    Account[] participants;
+}

@@ -1,0 +1,4 @@
+
+public enum Gender {
+    Nam, Nu, Khong_biet
+}

@@ -1,0 +1,7 @@
+
+public class Answer {
+    int AnswerId;
+    String Contents;
+    Question Question;
+    boolean IsCorrect;
+}
