@@ -1,4 +1,0 @@
-
-public enum gioiTinh {
-    Nam, Nu, Khong_biet
-}
