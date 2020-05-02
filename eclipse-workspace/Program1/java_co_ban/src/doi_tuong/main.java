@@ -105,7 +105,8 @@ public class main {
         case 3:
         	addGroup();
         	break;
-        	
+        default :
+        	System.out.println("Bạn chưa lựa chọn3");
         }  
 		
 	}
