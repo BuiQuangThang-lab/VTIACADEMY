@@ -7,8 +7,8 @@ public class Default_value {
 	    int i;
 	    for(i = 0; i < account.length; i ++) {
 	    	account[i] = new Account();
-	    	account[i].ten = "ten" + i;
-	    	account[i].email = "email" + i;
+	    	account[i].ten = (String) ("ten" + i);
+	    	account[i].email = (String) ("email" + i);
 	    	account[i].CreateDate = new Date();
 	    }
 		for(i = 0; i < account.length; i++) {

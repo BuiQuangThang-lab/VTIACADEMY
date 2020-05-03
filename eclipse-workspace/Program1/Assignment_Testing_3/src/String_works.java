@@ -267,7 +267,7 @@ public class String_works {
     			if(a.charAt(i) == a.charAt(j)) {
     				continue;
     			}result = 0;
-    			kiTu = a.charAt(i)
+    			kiTu = a.charAt(i);
     		}
     	}
     	if(result == 1) {
@@ -307,7 +307,7 @@ public class String_works {
     	 hasNumber();
     	 revert();
     	 Question16();
-    	 duplicate()
+    	 duplicate();
     	 Question18();
     	 
 	}
