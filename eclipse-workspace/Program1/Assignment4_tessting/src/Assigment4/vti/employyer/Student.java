@@ -1,4 +1,4 @@
-package Assigment4.vti.entity;
+package Assigment4.vti.employyer;
 
 public class Student {
    private int id;
