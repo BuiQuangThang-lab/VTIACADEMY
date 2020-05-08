@@ -8,11 +8,15 @@ public class Person {
 	private int tuoi;
 	private String gioiTinh;
 	private String diaChi;
+	
 
 	public static ArrayList<Person> arrPerson;
-
+	
 	public Person() {
 
+	}
+	public Person(String hoTen) {
+		this.hoTen = hoTen;
 	}
 
 	public Person(String hoTen, int tuoi, String gioiTinh, String diaChi) {
@@ -54,7 +58,8 @@ public class Person {
 	protected void setDiaChi(String diaChi) {
 		this.diaChi = diaChi;
 	}
-
+	
+	
 	public void NhapThongTin() {
 
 		Scanner sc = new Scanner(System.in);
@@ -69,18 +74,19 @@ public class Person {
 		arrPerson = new ArrayList<Person>();
 		Person s = new Person(hoTen, tuoi, diaChi, gioiTinh);
 		arrPerson.add(s);
+		
 
 	}
 
 	public void timNhanVienTheoTen() {
+		NhapThongTin();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Nhập vào nhân viên vần tìm: ");
 		String Ten = sc.nextLine();
-		String[] thongTinNV = hoTen.split("\t");
-		if (thongTinNV[0].equals(Ten)) {
-			System.out.println("Có nhân viên tên " + Ten);
-		} else {
-			System.out.println("Không có nhân viên tên " + Ten);
+		for(int i = 0; i < arrPerson.size(); i++) {
+			if(arrPerson.get(i).getHoTen().equals(Ten)) {
+				System.out.println("Có nhân viên: " + arrPerson.get(i).getHoTen() + arrPerson.get(i).getTuoi() );
+			}
 		}
 	}
 
