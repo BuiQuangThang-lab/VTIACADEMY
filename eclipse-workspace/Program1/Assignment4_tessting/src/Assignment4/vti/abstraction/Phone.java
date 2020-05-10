@@ -55,7 +55,7 @@ public abstract class Phone {
 			if (numberPhone.get(i).getName().equals(xoa)) {
 				numberPhone.remove(i);
 			} else {
-				System.out.printf("id = %d not existed.\n", xoa);
+				System.out.printf("Không tìm thấy sđt cần xóa", xoa);
 			}
 		}
 
@@ -66,7 +66,7 @@ public abstract class Phone {
 		System.out.println("Nhập vào tên cần update sđt: ");
 		String capNhat = sc.nextLine();
 		for(int i = 0; i < numberPhone.size(); i++) {
-			if (numberPhone.get(i).getName() == capNhat) {
+			if (numberPhone.get(i).getName().equals(capNhat)) {
 				System.out.println("Số điện thoại cũ: ");
 				System.out.println("Nhập số điện thoại mới: ");
 				String newNumber = sc.nextLine();
